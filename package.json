@@ -1,0 +1,9 @@
+{
+  "name": "imagenator",
+  "version": "1.0.0",
+  "description": "Ambitious image editor",
+  "main": "index.js",
+  "repository": "git@github.com:Darth-koder007/imagenator.git",
+  "author": "Vijay Singh <vj2010sn@gmail.com>",
+  "license": "MIT"
+}
