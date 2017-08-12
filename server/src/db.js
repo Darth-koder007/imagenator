@@ -6,7 +6,7 @@ const pool  = mysql.createPool({
   connectionLimit : 10,
 	"user": "root",
  	"password": "root",
- 	"database": "linkedin_data",
+ 	"database": "imagenator",
  	"port": "3306",
  	"host": "127.0.0.1",
 });
@@ -22,8 +22,9 @@ const getConnectionPool = (callback) => {
 
       return;
     }
-     callback(connection);
+
 		callback(connection);
+
     connection.on('error', (error) => {
       console.log("fatal error ->>", error);
       if (error.fatal) {
