@@ -13,3 +13,16 @@
     </ul>
   </div>
 </div>
+<div class="main-options">
+  <div class="file-upload">
+    <form ng-submit="$ctrl.uploadImage()">
+     <div>
+       <label for="file">Choose file to upload</label>
+       <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/>
+     </div>
+     <div>
+       <button type="submit">Submit</button>
+     </div>
+    </form>
+  </div>
+</div>

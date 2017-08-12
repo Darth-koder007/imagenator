@@ -1,7 +1,8 @@
 class EditorController {
   constructor(User) {
     'ngInject';
-    console.log(User);
+
+    this._user = User;
   }
 
   $onInit() {
@@ -9,8 +10,7 @@ class EditorController {
     this.objectsList = [];
     this.canvas = new fabric.Canvas('canvas');
     this.canvas.on('object:added', (event) => {
-      // this.objectsList = JSON.parse(JSON.stringify(event.target.canvas.toJSON().objects));
-      this.objectsList.push({type:'vijay'});
+      this.objectsList = JSON.parse(JSON.stringify(event.target.canvas.toJSON().objects));
     });
 
     this.canvas.on('object:modified',(event) => {
@@ -32,6 +32,14 @@ class EditorController {
     this.canvas.add(obj);
   }
 
+  addImage(url) {
+    fabric.Image.fromURL(url, (img) => {
+      img.width = 200;
+      img.height = 200;
+      this.canvas.add(img);
+    });
+  }
+
   selectObject(index) {
     this.canvas.setActiveObject(this.canvas.item(index));
   }
@@ -51,6 +59,13 @@ class EditorController {
 
   saveCanvasToBackend() {
     // TODO: Save canvas as current
+  }
+
+  async uploadImage() {
+    let img_url = await this._user.uploadImage(document.querySelector('#file').files[0]).then();
+    if (img_url) {
+      this.addImage(img_url);
+    }
   }
 }
 

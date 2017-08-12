@@ -2,18 +2,17 @@ class HomeController {
   constructor(User) {
     "ngInject";
 
-    this.user = User;
+    this._user = User;
     this.name = 'home';
     this.username = '';
   }
 
   submitForm() {
-    console.log(this.username);
-    this.user.createOrLoginUser(this.username);
+    this._user.createOrLoginUser(this.username);
   }
 
   logout() {
-    this.user.logout();
+    this._user.logout();
   }
 }
 

@@ -62,6 +62,23 @@ export default class User {
     });
   }
 
+  uploadImage(image) {
+    let fd = new FormData();
+    fd.append('image', image);
+    return this._$http({
+      method: 'POST',
+      url: 'http://localhost:8080/api/image-upload',
+      headers: { 'Content-Type': undefined},
+      data: fd
+    })
+    .then((response) => {
+      if (response.data && response.data.success) {
+        return response.data.data.img_url;
+      }
+    })
+    .catch((error) => {console.log("iuc", error);});;
+  }
+
   logout() {
     this.username = null;
     this.designs = [];
