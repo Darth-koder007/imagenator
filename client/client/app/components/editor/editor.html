@@ -1,0 +1,15 @@
+<navbar></navbar>
+<div class="editor-container">
+  <div class="interaction-menu flex-item-sub">
+    <button ng-click="$ctrl.addText()">add Text</button>
+  </div>
+  <canvas id="canvas" class="canvas flex-item-main" width="800" height="600"></canvas>
+  <div class="object-list flex-item-sub" ng-if="$ctrl.objectsList.length > 1">
+    <label>List Items</label>
+    <ul >
+      <li ng-repeat="item in $ctrl.objectsList track by $index"
+         ng-click="$ctrl.selectObject($index)"
+       >{{item.type}}</li>
+    </ul>
+  </div>
+</div>

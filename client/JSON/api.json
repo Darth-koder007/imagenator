@@ -1,0 +1,55 @@
+//API responses
+1: get user data full
+  Request:
+    url: api/get-user-data
+    type: post
+    payload: {
+      username: userName
+    }
+  Response:
+    statusCode: 200
+    payload: {
+      success: true | false,
+      data: {
+        allDesigns: {
+          id: {'normal':'canvasObj'}
+        },
+        currentDesign: {
+          id: {'normal':'canvasObj'}
+        }
+      },
+      status: 'USER_FOUND'|'USER_NOT_FOUND'
+    }
+2: save design
+  Request:
+    url: api/save-design
+    type: post
+    payload: {
+      username:username,
+      data: 'canvas Object'
+    }
+  Response:
+    statusCode: 200
+    payload: {
+      success: true | false,
+      data: {
+        allDesigns: {
+          id: {'normal':'canvasObj'}
+        },
+        currentDesign: {
+          id: {'normal':'canvasObj'}
+        }
+      },
+      status: 'FAIL_TO_SAVE'|'SAVED'
+    }
+3: Delete design
+  Request:
+    url: api/delete-design
+    type: DELETE
+    queryString: ObjId
+  Response:
+    statusCode: 200
+    payload: {
+      success: true | false,
+      status: 'FAIL_TO_DELETE'|'DELETED'
+    }

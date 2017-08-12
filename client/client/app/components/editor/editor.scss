@@ -1,0 +1,18 @@
+.editor-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+
+  .canvas-container {
+    background-color: #EEE;
+  }
+
+  .flex-item-main {
+    flex: 2;
+  }
+
+  .flex-item-sub {
+    flex: 1;
+    margin-left: 20px;
+  }
+}
