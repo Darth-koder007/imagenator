@@ -3,5 +3,6 @@ export default class User {
     'ngInject';
 
     this._$http = $http;
+    this.name = 'namee';
   }
 }

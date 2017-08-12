@@ -1,5 +1,7 @@
 class EditorController {
-  constructor() {
+  constructor(User) {
+    'ngInject';
+    console.log(User);
   }
 
   $onInit() {
