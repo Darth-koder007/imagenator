@@ -6,7 +6,7 @@ const pool  = mysql.createPool({
   connectionLimit : 10,
 	"user": "root",
  	"password": "root",
- 	"database": "linkedin_data",
+ 	"database": "imagenator",
  	"port": "3306",
  	"host": "127.0.0.1",
 });
