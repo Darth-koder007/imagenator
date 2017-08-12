@@ -18,7 +18,8 @@ const getDefaultResponseObject = () =>
 	JSON.parse(JSON.stringify({
 		success: true,
 		data: {},
-		status: ""
+		status: "",
+    err: null
 	}));
 
 export default ({ config, db }) => {
@@ -57,7 +58,7 @@ export default ({ config, db }) => {
 			if (error) {
 				responseObject.success = false;
 				responseObject.status = "USER_CREATE_FAIL_ERROR";
-
+        responseObject.err = error.code
 				return res.send(responseObject);
 			}
 
@@ -79,7 +80,7 @@ export default ({ config, db }) => {
 			}
 
 			if (results && results.length > 0) {
-				responseObject.status = "USER_CHECKED";
+				responseObject.status = "USER_EXISTS";
 				return res.send(responseObject);
 			}
 
@@ -133,7 +134,7 @@ export default ({ config, db }) => {
 		}
 
 		cloudinary.uploader.upload(req.file.path, function(result) {
-			// House keeping
+			// House keeping ;)
 			if (!Fs.existsSync(dest)) {
 			  Fs.mkdirSync(dest);
 			} else {
@@ -141,7 +142,7 @@ export default ({ config, db }) => {
 		      Fs.unlinkSync(dest + '/' + fileName);
 			 });
 		 	}
-			
+
 			if (result.secure_url) {
 				responseObject.data.img_url = result.secure_url;
 				responseObject.status = "IMAGE_UPLOADED";
