@@ -22,8 +22,9 @@ const getConnectionPool = (callback) => {
 
       return;
     }
-     callback(connection);
+
 		callback(connection);
+
     connection.on('error', (error) => {
       console.log("fatal error ->>", error);
       if (error.fatal) {

@@ -1,1 +1,7 @@
 CREATE SCHEMA `imagenator` ;
+CREATE TABLE `imagenator`.`new_table` (
+  `id_user` INT NOT NULL AUTO_INCREMENT,
+  `design_data` LONGTEXT COLLATE utf8_unicode_ci,
+  `created_at` TIMESTAMP NULL DEFAULT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_user`));
