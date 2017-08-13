@@ -1,4 +1,5 @@
 <nav class="navbar">
+  <button class="home-button btn btn-primary" ng-if="$ctrl._$state.current.component !== 'home'" type="button" ng-click="$ctrl.gotoHome()">Home</button>
   <div class="logo" ng-class="{'in-editor': $ctrl._$state.current.component === 'editor'}">
     <h1>Imagenator</h1>
   </div>
