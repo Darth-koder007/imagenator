@@ -1,3 +1,44 @@
+@import "../../common/common";
+
 .home {
-  color: red;
+  height: 80%;
+
+  .login-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+      .form-container {
+        align-self: center;
+
+        form {
+          .input-field {
+            input {
+              font-size: 5em;
+              width: 600px;
+              color: $accentColor;
+              background-color: transparent;
+              border: none;
+              border-bottom: 2px solid $accentColor;
+            }
+          }
+
+          .submit-button {
+            text-align: center;
+
+            button {
+              border: none;
+              height: 100px;
+              background-color: transparent;
+              border: 2px solid $accentColor;
+              width: 600px;
+              color: $accentColor;
+              border-radius: 10px;
+              font-size: 5em;
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+  }
 }

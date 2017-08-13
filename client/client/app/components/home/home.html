@@ -1,5 +1,5 @@
 <navbar></navbar>
-<main>
+<main class="home">
   <!-- <div>
     <h1>Found in {{ $ctrl.name }}.html</h1>
     <login></login>
@@ -8,7 +8,7 @@
     <div class="form-container" data-ng-if ="!$ctrl._user.isLoggedIn">
       <form ng-submit="$ctrl.submitForm()">
         <div class="input-field">
-          <input placeholder="Enter username... " ng-model="$ctrl.username"/>
+          <input  type="text" placeholder="Enter username... " ng-model="$ctrl.username"/>
         </div>
         <div class="submit-button">
           <button type="submit" >Submit</button>

@@ -1,18 +1,20 @@
 @import '../common';
 
 .navbar {
-  height: 6.5rem;
   background-color: $primaryColor;
   padding: 1rem;
+  font-family: $lobsterFont;
+  display: flex;
+  justify-content: center;
 
   .nav-links,
   .logo {
-    display: inline-block;
-  }
-
-  .logo {
-    color: $lightTextColor;
-    margin-right: 50%;
+    h1 {
+      font-size: 8em;
+      color: $lightTextColor;
+      margin:0;
+    }
+    // display: inline-block;
   }
 
   .nav-links span {
