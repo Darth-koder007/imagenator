@@ -49,8 +49,9 @@ class EditorController {
     } else {
       this._$state.go('home');
     }
-
-    this.objectsList = [...this.selectedDesign.current_state.objects];
+    if (this.selectedDesign.current_state && this.selectedDesign.current_state.objects) {
+      this.objectsList = [...this.selectedDesign.current_state.objects];
+    }
   }
 
   addText() {
