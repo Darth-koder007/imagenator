@@ -14,7 +14,16 @@
       color: $lightTextColor;
       margin:0;
     }
-    // display: inline-block;
+  }
+
+  .in-editor {
+    h1 {
+      font-size: 24px;
+      -webkit-transition: all .25s linear;
+      -moz-transition: all .25s linear;
+      -o-transition: all .25s linear;
+      transition: all .25s linear;
+    }
   }
 
   .nav-links span {
