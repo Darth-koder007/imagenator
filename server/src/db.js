@@ -15,9 +15,9 @@ const getConnectionPool = (callback) => {
   pool.getConnection((err, connection) => {
     if (err) {
       console.log('error connecting: ' + err.stack);
-      if (error.fatal) {
+      if (err && err.fatal) {
         console.log("Attempting to re-connect to mysql");
-        setTimeout(getConnectionPool, 500);
+        setTimeout(() => getConnectionPool(callback), 500);
       }
 
       return;
@@ -27,9 +27,9 @@ const getConnectionPool = (callback) => {
 
     connection.on('error', (error) => {
       console.log("fatal error ->>", error);
-      if (error.fatal) {
+      if (error && error.fatal) {
         console.log("Attempting to re-connect to mysql");
-        setTimeout(getConnectionPool, 500);
+        setTimeout(() => getConnectionPool(callback), 500);
       }
 
       return;
