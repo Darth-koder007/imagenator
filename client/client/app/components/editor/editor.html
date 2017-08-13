@@ -4,12 +4,41 @@
     <button ng-click="$ctrl.addText()">add Text</button>
   </div>
   <canvas id="canvas" class="canvas flex-item-main" width="800" height="600"></canvas>
-  <div class="object-list flex-item-sub" ng-if="$ctrl.objectsList.length > 1">
-    <label>List Items</label>
-    <ul >
-      <li ng-repeat="item in $ctrl.objectsList track by $index"
-         ng-click="$ctrl.selectObject($index)"
-       >{{item.type}}</li>
-    </ul>
+  <div class="list flex-item-sub">
+    <div class="object-list">
+      <label>Canvas Objects lists</label>
+      <ul>
+        <li ng-if="$ctrl.objectsList.length < 1">Add something to canvas...</li>
+        <li ng-repeat="item in $ctrl.objectsList track by $index">
+          <span ng-click="$ctrl.selectObject($index)">{{item.type}}</span>
+          <span ng-click="$ctrl.removeItemFromCanvas($index)"> X</span>
+        </li>
+      </ul>
+    </div>
+    <div class="object-list">
+      <label>Edit History</label>
+      <ul>
+        <li ng-if="$ctrl.selectedDesign.history.length < 1">Save canvas to generate history...</li>
+        <li ng-repeat="history in $ctrl.selectedDesign.history track by $index"
+            ng-click="$ctrl.selectDesignFromHistory(history.data)"
+        >{{history.created_at}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="main-options">
+  <div class="file-upload">
+    <form ng-submit="$ctrl.uploadImage()">
+     <div>
+       <label for="file">Choose file to upload</label>
+       <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/>
+     </div>
+     <div>
+       <button type="submit">Submit</button>
+     </div>
+    </form>
+  </div>
+  <div class="save">
+    <button type="button" ng-click="$ctrl.updateDesign()">Save</button>
   </div>
 </div>

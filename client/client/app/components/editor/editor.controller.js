@@ -1,21 +1,34 @@
 class EditorController {
-  constructor() {
-  }
+  constructor(User, $stateParams) {
+    'ngInject';
 
-  $onInit() {
+    this._user = User;
+    this._$stateParams = $stateParams;
     this.name = 'editor';
     this.objectsList = [];
     this.canvas = new fabric.Canvas('canvas');
+    this.canvas.on('after:render', (event) => {
+      this.objectsList = [];
+      this.objectsList = this.canvas.toJSON().objects;
+    });
+
     this.canvas.on('object:added', (event) => {
-      // this.objectsList = JSON.parse(JSON.stringify(event.target.canvas.toJSON().objects));
-      this.objectsList.push({type:'vijay'});
+      this.objectsList = [];
+      this.objectsList = this.canvas.toJSON().objects;
     });
 
     this.canvas.on('object:modified',(event) => {
-      this.objectsList = JSON.parse(JSON.stringify(event.target.canvas.toJSON().objects));
+      this.objectsList = [];
+      this.objectsList = this.canvas.toJSON().objects;
     });
+  }
 
-    this.fetchCanvasFromBackend();
+  $onInit() {
+    this.selectedDesign = this.getDesignByID(this._$stateParams.id);
+
+    if (this.selectedDesign && this.selectedDesign.current_state) {
+      this.canvas.loadFromJSON(this.selectedDesign.current_state,this.canvas.renderAll.bind(this.canvas));
+    }
   }
 
   addText() {
@@ -30,25 +43,40 @@ class EditorController {
     this.canvas.add(obj);
   }
 
-  selectObject(index) {
-    this.canvas.setActiveObject(this.canvas.item(index));
-  }
-
-  fetchCanvasFromBackend() {
-    // TODO: Fetch selected canvas from backend
-    // this.canvas.loadFromJSON(json, this.canvas.renderAll.bind(this.canvas), (o, object) => {
-    //
-    // });
-    //
-    fabric.Image.fromURL('https://s-media-cache-ak0.pinimg.com/736x/ee/fd/4d/eefd4d45c0cd9dd7f3d86b4b49e7fc72--cute-minions-minion-stuff.jpg', (img) => {
+  addImage(url) {
+    fabric.Image.fromURL(url, (img) => {
       img.width = 200;
       img.height = 200;
       this.canvas.add(img);
     });
   }
 
-  saveCanvasToBackend() {
+  selectDesignFromHistory(objects) {
+    this.canvas.loadFromJSON(objects, this.canvas.renderAll.bind(this.canvas));
+  }
+
+  selectObject(index) {
+    this.canvas.setActiveObject(this.canvas.item(index));
+  }
+
+  removeItemFromCanvas($index) {
+    this.objectsList = this.objectsList.splice($index, 1);
+  }
+
+  updateDesign() {
     // TODO: Save canvas as current
+    this._user.updateDesign({id: this._$stateParams.id, design: this.canvas.toJSON()});
+  }
+
+  async uploadImage() {
+    let img_url = await this._user.uploadImage(document.querySelector('#file').files[0]);
+    if (img_url) {
+      this.addImage(img_url);
+    }
+  }
+
+  getDesignByID(id) {
+    return this._user.designs.find(ele => ele.id === id);
   }
 }
 

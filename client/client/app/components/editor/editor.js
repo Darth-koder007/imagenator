@@ -15,7 +15,7 @@ let editorModule = angular.module('editor', [
 
   $stateProvider
     .state('editor', {
-      url: '/',
+      url: '/editor/:id',
       component: 'editor'
     });
 })
