@@ -5,21 +5,35 @@ class EditorController {
     this._user = User;
     this._$stateParams = $stateParams;
     this.name = 'editor';
+    this.selectedHistoryIndex = null;
     this.objectsList = [];
     this.canvas = new fabric.Canvas('canvas');
+
     this.canvas.on('after:render', (event) => {
       this.objectsList = [];
-      this.objectsList = this.canvas.toJSON().objects;
+      let data = this.canvas.toJSON().objects;
+      this.objectsList = data.map((ele) => {
+        return ele;
+      });
+      data = null;
     });
 
     this.canvas.on('object:added', (event) => {
       this.objectsList = [];
-      this.objectsList = this.canvas.toJSON().objects;
+      let data = this.canvas.toJSON().objects;
+      this.objectsList = data.map((ele) => {
+        return ele;
+      });
+      data = null;
     });
 
     this.canvas.on('object:modified',(event) => {
       this.objectsList = [];
-      this.objectsList = this.canvas.toJSON().objects;
+      let data = this.canvas.toJSON().objects;
+      this.objectsList = data.map((ele) => {
+        return ele;
+      });
+      data = null;
     });
   }
 
@@ -27,8 +41,12 @@ class EditorController {
     this.selectedDesign = this.getDesignByID(this._$stateParams.id);
 
     if (this.selectedDesign && this.selectedDesign.current_state) {
-      this.canvas.loadFromJSON(this.selectedDesign.current_state,this.canvas.renderAll.bind(this.canvas));
+      this.canvas.loadFromJSON(this.selectedDesign.current_state,this.canvas.renderAll.bind(this.canvas), (o, object) => {
+        this.objectsList = [...object];
+      });
     }
+
+    this.objectsList = [...this.selectedDesign.current_state.objects];
   }
 
   addText() {
@@ -51,7 +69,9 @@ class EditorController {
     });
   }
 
-  selectDesignFromHistory(objects) {
+  selectDesignFromHistory(objects, index) {
+    this.selectedHistoryIndex = index;
+    this.objectsList = [...objects.objects];
     this.canvas.loadFromJSON(objects, this.canvas.renderAll.bind(this.canvas));
   }
 
@@ -60,11 +80,16 @@ class EditorController {
   }
 
   removeItemFromCanvas($index) {
-    this.objectsList = this.objectsList.splice($index, 1);
+    this.objectsList.splice($index, 1);
+
+    let data = {
+      objects: this.objectsList
+    };
+
+    this.canvas.loadFromJSON(data, this.canvas.renderAll.bind(this.canvas));
   }
 
   updateDesign() {
-    // TODO: Save canvas as current
     this._user.updateDesign({id: this._$stateParams.id, design: this.canvas.toJSON()});
   }
 
@@ -77,6 +102,21 @@ class EditorController {
 
   getDesignByID(id) {
     return this._user.designs.find(ele => ele.id === id);
+  }
+
+  humanReadableDate(date) {
+    let temp = new Date(date);
+    return `${temp.toDateString()} ${temp.toTimeString()}`;
+  }
+
+  reset() {
+    this.selectedHistoryIndex = null;
+    this.objectsList = [];
+    this.selectedDesign = this.getDesignByID(this._$stateParams.id);
+
+    if (this.selectedDesign && this.selectedDesign.current_state) {
+      this.canvas.loadFromJSON(this.selectedDesign.current_state,this.canvas.renderAll.bind(this.canvas));
+    }
   }
 }
 
