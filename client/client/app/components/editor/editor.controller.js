@@ -49,7 +49,7 @@ class EditorController {
     } else {
       this._$state.go('home');
     }
-    if (this.selectedDesign.current_state && this.selectedDesign.current_state.objects) {
+    if (this.selectedDesign && this.selectedDesign.current_state.objects) {
       this.objectsList = [...this.selectedDesign.current_state.objects];
     }
   }

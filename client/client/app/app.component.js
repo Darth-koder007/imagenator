@@ -1,5 +1,5 @@
 import template from './app.html';
-import './common/assets/fonts/fonts.scss';
+import './common/assets/fonts.css';
 import './app.scss';
 
 let appComponent = {
