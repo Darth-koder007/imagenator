@@ -6,7 +6,7 @@ import Editor from './editor/editor';
 let componentModule = angular.module('app.components', [
   Home,
   About,
-  Editor,
+  Editor
 ])
 
 .name;
