@@ -1,5 +1,5 @@
 <navbar></navbar>
-<main>
+<main class="home">
   <!-- <div>
     <h1>Found in {{ $ctrl.name }}.html</h1>
     <login></login>
@@ -8,7 +8,7 @@
     <div class="form-container" data-ng-if ="!$ctrl._user.isLoggedIn">
       <form ng-submit="$ctrl.submitForm()">
         <div class="input-field">
-          <input placeholder="Enter username... " ng-model="$ctrl.username"/>
+          <input  type="text" placeholder="Enter username... " ng-model="$ctrl.username"/>
         </div>
         <div class="submit-button">
           <button type="submit" >Submit</button>
@@ -16,21 +16,24 @@
       </form>
     </div>
     <div class="user-display" data-ng-if="$ctrl._user.isLoggedIn">
-      <div class="user-info">
+      <div class="user-info grouping">
         Hola! {{$ctrl._user.username}}
-        <button type="button" data-ng-click="$ctrl.logout()">Logout</button>
-      </div>
-      <div class="design-list">
-        <ul>
-          <li ng-repeat="design in $ctrl._user.designs track by $index" ng-click="$ctrl.selectDesign(design.id)">{{ design.name }}, {{ design.created_at }}</li>
-        </ul>
+        <button class="float-right btn btn-primary" type="button" data-ng-click="$ctrl.logout()">Logout</button>
       </div>
       <div class="new-design-form">
-        <form name="new-design-form" ng-submit="$ctrl.createNewDesign()">
+        <form name="new-design-form" class="grouping" ng-submit="$ctrl.createNewDesign()">
+          <label>Please enter name for new design</label>
           <input name="new-design" type="text" ng-model="$ctrl.newDesignName" required/>
           <span ng-show="newDesignForm.newDesign.$touched && newDesignForm.newDesign.$invalid">The design name is required.</span>
-          <button type="submit">Add New Design</button>
+          <button class="btn btn-cta float-right" type="submit">Add New Design</button>
         </form>
+      </div>
+      <div class="list">
+        <ul>
+          <li>List of Designs</li>
+          <li ng-if="$ctrl._user.designs.length < 1">Add Design...</li>
+          <li ng-repeat="design in $ctrl._user.designs track by $index" ng-click="$ctrl.selectDesign(design.id)">Name: {{ design.name }} <br/> Created On: {{ $ctrl.humanReadableDate(design.created_at) }}</li>
+        </ul>
       </div>
     </div>
   </div>

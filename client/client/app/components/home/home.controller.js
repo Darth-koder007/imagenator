@@ -25,6 +25,11 @@ class HomeController {
   selectDesign(id) {
     this._$state.go('editor', {id: id});
   }
+
+  humanReadableDate(date) {
+    let temp = new Date(date);
+    return `${temp.toDateString()} ${temp.toTimeString()}`;
+  }
 }
 
 export default HomeController;

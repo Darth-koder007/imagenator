@@ -1,44 +1,53 @@
 <navbar></navbar>
 <div class="editor-container">
-  <div class="interaction-menu flex-item-sub">
-    <button ng-click="$ctrl.addText()">add Text</button>
-  </div>
-  <canvas id="canvas" class="canvas flex-item-main" width="800" height="600"></canvas>
-  <div class="list flex-item-sub">
-    <div class="object-list">
-      <label>Canvas Objects lists</label>
-      <ul>
-        <li ng-if="$ctrl.objectsList.length < 1">Add something to canvas...</li>
-        <li ng-repeat="item in $ctrl.objectsList track by $index">
-          <span ng-click="$ctrl.selectObject($index)">{{item.type}}</span>
-          <span ng-click="$ctrl.removeItemFromCanvas($index)"> X</span>
-        </li>
-      </ul>
+  <div class="editor-components">
+    <div class="interaction-menu flex-item-sub">
+      <div class="add-text">
+        <button class="btn btn-primary" ng-click="$ctrl.addText()">Add Text Box</button>
+      </div>
+      <div class="list">
+        <div class="object-list">
+          <ul>
+            <li ng-if="$ctrl.objectsList.length < 1">Add something to canvas...</li>
+            <li>Canvas Items lists</li>
+            <li ng-repeat="item in $ctrl.objectsList track by $index">
+              {{$index+1}}.
+              <span ng-click="$ctrl.selectObject($index)">{{item.type}}</span>
+              <span class="delete-icon" ng-click="$ctrl.removeItemFromCanvas($index)"> X</span>
+            </li>
+          </ul>
+        </div>
+        <div class="object-list">
+          <ul>
+            <li ng-if="$ctrl.selectedDesign.history.length < 1">Save canvas to generate history...</li>
+            <li>Edit History</li>
+            <li ng-repeat="history in $ctrl.selectedDesign.history track by $index"
+                ng-click="$ctrl.selectDesignFromHistory(history.data, $index)"
+                ng-class="{'li-selected': $ctrl.selectedHistoryIndex === $index}"
+            >{{$index+1}}. {{ $ctrl.humanReadableDate(history.created_at) }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="object-list">
-      <label>Edit History</label>
-      <ul>
-        <li ng-if="$ctrl.selectedDesign.history.length < 1">Save canvas to generate history...</li>
-        <li ng-repeat="history in $ctrl.selectedDesign.history track by $index"
-            ng-click="$ctrl.selectDesignFromHistory(history.data)"
-        >{{history.created_at}}</li>
-      </ul>
+    <canvas id="canvas" class="canvas flex-item-main" width="800" height="480"></canvas>
+  </div>
+  <div class="main-options">
+    <div class="save">
+      <button type="button" class="btn btn-cta" ng-click="$ctrl.updateDesign()">Save</button>
     </div>
-  </div>
-</div>
-<div class="main-options">
-  <div class="file-upload">
-    <form ng-submit="$ctrl.uploadImage()">
-     <div>
-       <label for="file">Choose file to upload</label>
-       <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/>
-     </div>
-     <div>
-       <button type="submit">Submit</button>
-     </div>
-    </form>
-  </div>
-  <div class="save">
-    <button type="button" ng-click="$ctrl.updateDesign()">Save</button>
+    <div class="reset">
+      <button type="button" class="btn btn-cta" ng-click="$ctrl.reset()">Reset</button>
+    </div>
+    <div class="file-upload">
+      <form >
+       <div>
+         <label for="file">Choose Image to upload:</label>
+         <input  class="btn btn-primary" type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/>
+         <button class="btn btn-primary" type="button" ng-click="$ctrl.uploadImage()">Upload</button>
+       </div>
+       <div>
+       </div>
+      </form>
+    </div>
   </div>
 </div>

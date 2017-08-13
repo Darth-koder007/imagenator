@@ -1,18 +1,116 @@
+@import "../../common/common";
+
 .editor-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
 
-  .canvas-container {
-    background-color: #EEE;
+  .btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
   }
 
-  .flex-item-main {
-    flex: 2;
+  .btn-primary {
+    color: #fff;
+    background-color: $accentColor;
+    border-color: #66a5ad;
   }
 
-  .flex-item-sub {
-    flex: 1;
-    margin-left: 20px;
+  .btn-cta {
+    color: #fff;
+    background-color: $accentColor;
+    border-color: #003B46;
+  }
+
+  .editor-components {
+    display: flex;
+    justify-content: center;
+    height: 50%;
+    margin:0 auto;
+    margin-top: 50px;
+    width: 90%;
+    font-size: 14px;
+
+    .list {
+      .object-list {
+        margin-top: 20px;
+        border:2px solid #66a5ad;
+        border-radius: 3px;
+
+        ul {
+          cursor: pointer;
+
+          li {
+            padding-top:2px;
+            padding-bottom: 2px;
+            padding-left: 2px;
+            border-bottom: 1px solid #66a5ad;
+            border-radius: 5px;
+
+            .delete-icon {
+              background-color: #66a5ad;
+              color: #FFF;
+            }
+          }
+
+          li:first-child {
+            background-color: $accentColor;
+            color: white;
+            font-size: 16px;
+            cursor: auto;
+            border:none;
+            border-radius: 0;
+          }
+
+          .li-selected {
+            background-color: #66A5AD;
+            color:#FFF
+          }
+        }
+      }
+    }
+
+    .canvas-container {
+      background-color: #fff;
+      margin-left: 20px;
+      box-shadow: 0px 0px 5px #888888;
+    }
+
+    .flex-item-main {
+      flex: 3;
+    }
+
+    .flex-item-sub {
+      flex: 1;
+    }
+  }
+
+  .main-options {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 14px;
+
+    >div {
+      margin-left: 20px;
+    }
+
+    >div:first-child {
+      margin-left: 0px;
+    }
   }
 }

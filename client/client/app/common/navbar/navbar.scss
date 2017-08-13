@@ -1,18 +1,29 @@
 @import '../common';
 
 .navbar {
-  height: 6.5rem;
   background-color: $primaryColor;
   padding: 1rem;
+  font-family: $lobsterFont;
+  display: flex;
+  justify-content: center;
 
   .nav-links,
   .logo {
-    display: inline-block;
+    h1 {
+      font-size: 8em;
+      color: $lightTextColor;
+      margin:0;
+    }
   }
 
-  .logo {
-    color: $lightTextColor;
-    margin-right: 50%;
+  .in-editor {
+    h1 {
+      font-size: 24px;
+      -webkit-transition: all .25s linear;
+      -moz-transition: all .25s linear;
+      -o-transition: all .25s linear;
+      transition: all .25s linear;
+    }
   }
 
   .nav-links span {
