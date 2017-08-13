@@ -17,7 +17,7 @@ export default class User {
     .then((response) => {console.log("dus", response);
       if (response && response.data.status === "DATA_FOUND") {
         this.isLoggedIn = true;
-        this.designs = response.data.data;
+        this.designs = response.data.data.data;
       }
     })
     .catch((error) => {console.log("duc", error);});
@@ -32,6 +32,7 @@ export default class User {
     .then((response) => {
       if (response.data.success && response.data.status === "USER_EXISTS") {
         this.username = username;
+        this.isLoggedIn = true;
         this.getDesigns();
       } else {
         this._$http({
@@ -52,19 +53,41 @@ export default class User {
     .catch((response) => {console.log("cuc", response);});
   }
 
-  saveDesign() {
+  updateDesign({ id, design }) {
     this._$http({
       method: 'POST',
-      url: 'http://localhost:8080/api/save-design',
+      url: 'http://localhost:8080/api/update-design',
       data: {
-        design: this.design
+        newCurrentState: design,
+        username: this.username,
+        id: id
       }
-    });
+    })
+    .then((response) => {})
+    .catch((error) => {});
+  }
+
+  createNewDesign(designName) {
+    this._$http({
+      method: 'POST',
+      url: 'http://localhost:8080/api/create-design',
+      data: {
+        designName: designName,
+        username: this.username
+      }
+    })
+    .then((response) => {
+      if (response.data && response.data.status === 'DESIGN_SAVED') {
+        this.getDesigns();
+      }
+    })
+    .catch((error) => {});
   }
 
   uploadImage(image) {
     let fd = new FormData();
     fd.append('image', image);
+
     return this._$http({
       method: 'POST',
       url: 'http://localhost:8080/api/image-upload',

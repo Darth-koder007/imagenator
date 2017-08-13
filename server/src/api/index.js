@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { version } from '../../package.json';
-import facets from './facets';
+import imagenator from './imagenator';
 
 export default ({ config, db }) => {
 	let api = Router();
 
-	// mount the facets resource
-	api.use('/', facets({ config, db }));
+	// mount the imagenator resource
+	api.use('/', imagenator({ config, db }));
 
 	// perhaps expose some API metadata at the root
 	api.get('/', (req, res) => {
