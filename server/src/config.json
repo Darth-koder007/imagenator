@@ -1,5 +1,10 @@
 {
 	"port": 8080,
 	"bodyLimit": "100kb",
-	"corsHeaders": ["Link"]
+	"corsHeaders": ["Link"],
+	"db": "imagenator",
+	"dbUser":"root",
+	"dbPassword": "root",
+	"dbPort": "3306",
+	"dbHost": "127.0.0.1"
 }

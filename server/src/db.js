@@ -1,14 +1,15 @@
 import mysql from 'mysql';
+import config from './config.json';
 
 export default callback => {
 
 const pool  = mysql.createPool({
   connectionLimit : 10,
-	"user": "root",
- 	"password": "root",
- 	"database": "imagenator",
- 	"port": "3306",
- 	"host": "127.0.0.1",
+ 	"database": config.db,
+ 	"port": config.dbPort,
+  "host": config.dbHost,
+  "user": config.dbUser,
+  "password": config.dbPassword
 });
 
 const getConnectionPool = (callback) => {
