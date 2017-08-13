@@ -11,7 +11,7 @@ export default class User {
   getDesigns() {
     this._$http({
       method: 'GET',
-      url: 'http://localhost:8080/api/user-data',
+      url: '/api/user-data',
       params: {username: this.username}
     })
     .then((response) => {console.log("dus", response);
@@ -26,7 +26,7 @@ export default class User {
   createOrLoginUser(username) {
     this._$http({
       method: 'GET',
-      url: 'http://localhost:8080/api/user-check',
+      url: '/api/user-check',
       params: { username }
     })
     .then((response) => {
@@ -37,7 +37,7 @@ export default class User {
       } else {
         this._$http({
           method: 'POST',
-          url: 'http://localhost:8080/api/user-create',
+          url: '/api/user-create',
           data: { username }
         })
         .then((response) => {
@@ -56,7 +56,7 @@ export default class User {
   updateDesign({ id, design }) {
     this._$http({
       method: 'POST',
-      url: 'http://localhost:8080/api/update-design',
+      url: '/api/update-design',
       data: {
         newCurrentState: design,
         username: this.username,
@@ -70,7 +70,7 @@ export default class User {
   createNewDesign(designName) {
     this._$http({
       method: 'POST',
-      url: 'http://localhost:8080/api/create-design',
+      url: '/api/create-design',
       data: {
         designName: designName,
         username: this.username
@@ -90,7 +90,7 @@ export default class User {
 
     return this._$http({
       method: 'POST',
-      url: 'http://localhost:8080/api/image-upload',
+      url: '/api/image-upload',
       headers: { 'Content-Type': undefined},
       data: fd
     })

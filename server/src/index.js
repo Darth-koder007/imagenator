@@ -2,6 +2,7 @@ import http from 'http';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import path from 'path';
 import bodyParser from 'body-parser';
 import initializeDb from './db';
 import middleware from './middleware';
@@ -22,6 +23,9 @@ app.use(cors({
 app.use(bodyParser.json({
 	limit : config.bodyLimit
 }));
+
+//Use webapp
+app.use(express.static(path.join(__dirname, '../../client/dist')));
 
 // connect to db
 initializeDb( db => {
