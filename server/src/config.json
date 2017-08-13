@@ -1,5 +1,10 @@
 {
 	"port": 8080,
 	"bodyLimit": "100kb",
-	"corsHeaders": ["Link"]
+	"corsHeaders": ["Link"],
+	"db": "imagenator",
+	"dbPort": "3306",
+	"dbHost": "urg.cxfm7hh0zjaw.ap-south-1.rds.amazonaws.com",
+	"dbUser": "urguser",
+	"dbPassword": "qwerty123"
 }
