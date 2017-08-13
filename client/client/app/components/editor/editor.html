@@ -1,21 +1,9 @@
 <navbar></navbar>
 <div class="editor-container">
-  <div class="editor-comoponents">
+  <div class="editor-components">
     <div class="interaction-menu flex-item-sub">
       <div class="add-text">
-        <label for="file">Add a text box in canvas</label>
-        <button class="btn btn-primary" ng-click="$ctrl.addText()">Add Text</button>
-      </div>
-      <div class="file-upload">
-        <form >
-         <div>
-           <label for="file">Choose file to upload</label>
-           <input  class="btn btn-primary" type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/>
-         </div>
-         <div>
-           <button class="btn btn-primary" type="button" ng-click="$ctrl.uploadImage()">Upload</button>
-         </div>
-        </form>
+        <button class="btn btn-primary" ng-click="$ctrl.addText()">Add Text Box</button>
       </div>
       <div class="list">
         <div class="object-list">
@@ -45,10 +33,21 @@
   </div>
   <div class="main-options">
     <div class="save">
-      <button type="button" ng-click="$ctrl.updateDesign()">Save</button>
+      <button type="button" class="btn btn-cta" ng-click="$ctrl.updateDesign()">Save</button>
     </div>
     <div class="reset">
-      <button type="button" ng-click="$ctrl.reset()">Reset</button>
+      <button type="button" class="btn btn-cta" ng-click="$ctrl.reset()">Reset</button>
+    </div>
+    <div class="file-upload">
+      <form >
+       <div>
+         <label for="file">Choose Image to upload:</label>
+         <input  class="btn btn-primary" type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/>
+         <button class="btn btn-primary" type="button" ng-click="$ctrl.uploadImage()">Upload</button>
+       </div>
+       <div>
+       </div>
+      </form>
     </div>
   </div>
 </div>

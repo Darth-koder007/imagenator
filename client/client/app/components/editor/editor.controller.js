@@ -1,9 +1,11 @@
 class EditorController {
-  constructor(User, $stateParams) {
+  constructor(User, $state, $stateParams) {
     'ngInject';
 
     this._user = User;
     this._$stateParams = $stateParams;
+    this._$state = $state;
+
     this.name = 'editor';
     this.selectedHistoryIndex = null;
     this.objectsList = [];
@@ -44,6 +46,8 @@ class EditorController {
       this.canvas.loadFromJSON(this.selectedDesign.current_state,this.canvas.renderAll.bind(this.canvas), (o, object) => {
         this.objectsList = [...object];
       });
+    } else {
+      this._$state.go('home');
     }
 
     this.objectsList = [...this.selectedDesign.current_state.objects];
